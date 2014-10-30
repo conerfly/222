@@ -1,0 +1,47 @@
+
+#
+
+create table Login(
+	username varchar(20) primary key,
+	password varchar(20),
+	permission	varchar(10),
+	profession varchar(50),
+	mail	varchar(50),
+	enrolltime datetime,
+	logintime  datetime
+	);
+
+
+create table Paper(
+	pid int identity(1,1) primary key,
+	authorname varchar(20),
+	advisorname varchar(20),
+	title	varchar(50),
+	content	varchar(max),
+	comment varchar(1000),
+	uploadtime datetime,
+	deadline	datetime,
+	remarktime	datetime,
+	delay		int,
+	state		varchar(10),
+	newadvisor varchar(20),
+	foreign key(authorname) references Login(username),
+	foreign key(advisorname) references Login(username),
+	foreign key(newadvisor) references Login(username)
+	);
+	
+
+create table Activity(
+	aid int identity(1,1) primary key,
+	content varchar(2000),
+	releasetime datetime
+	);
+
+insert into Activity values('1234567',getdate());
+
+select aid,content,convert(varchar(50),releasetime,120) from activity;
+
+insert into Login values('a','a','admin','all','admin@126.com',getdate(),getdate());
+insert into Login values('b','b','chair','manage','chair@126.com',getdate(),getdate());
+insert into Login values('c','c','member','math','member@126.com',getdate(),getdate());
+insert into Login values('d','d','author','one','author@126.com',getdate(),getdate());
